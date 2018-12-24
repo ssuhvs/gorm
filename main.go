@@ -449,6 +449,8 @@ func (s *DB) RawMap(sqlQuery string, sqlValues ...interface{}) (result []map[str
 	if err != nil {
 		return
 	}
+	defer rows.Close()
+
 	cols, err := rows.Columns()
 	if err != nil {
 		return
