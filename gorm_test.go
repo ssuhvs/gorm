@@ -3,6 +3,7 @@ package gorm
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/Jetereting/gorm"
 	_ "github.com/go-sql-driver/mysql"
@@ -19,6 +20,10 @@ func init() {
 		fmt.Println(err)
 		return
 	}
+	db.DB().SetMaxOpenConns(50)
+	db.DB().SetMaxIdleConns(10)
+	db.DB().SetConnMaxLifetime(time.Hour * 2)
+	db.Debug()
 }
 
 // TestQuery 测试查询
